@@ -1,93 +1,52 @@
 # Vidyutt-backend
 
+## hello this is the entirity of adhoc code used used to collect scrape and train models for my SIH project.
+
+### let me give you an overview of what is actually going on
+- data is sourced from [State load Dispatch Center](https://www.delhisldc.org/Redirect.aspx?Loc=0804) and [Grid India reports](https://report.grid-india.in/index.php?p=Daily+Report%2FPSP+Report) 
+- the grid report data was in the form of pdfs and was converted to xlsx and then those xlsx files were merged and turned into a consistant dataset.
+- as the data was complete and was definitely accurate so we shifted our focus on testing and trying diffrent models, cross refrencing and validating our results.
+- here are our findings:
+    - the arima plus model provided by vertex ai for on demand custom training was the most inaccurate one and yielded around 89% accuracy
+    - Seasonal Autoregressive Moving Average(SARIMA) model was one of the best choices we could pursue and here are the specific values we used:
+        - the model was stationary and had a p-value 0(could be a methodological error)
+        - the ADF statistic was : -23.047657363554325
+        - the p , q and r values were taken to be 1,1 and 1 respectively
+        - P , Q , R and m values were taken to be 0, 1 ,5 and 12 respectively
+
+------------------
+
+# Data Characterstics:
+## Visualising Yearly Trends
+- It is pretty apparent that the data is seasonal in nature as we encounter steep peaks in the months of May and they slowly taper off till December.
+- other than being seasonal it has nonsensical spikes and dips that need to be explained on a monthly, weekly and daily level for it to be coheasive in predicting the demand for a 5 minute interval on a specific day.  
+![](output.png)
+
+## Weekly and Daily Observations 
+- there are periodic peaks and downturns experienced probably influenced by weekends.
+- The data fluctuates significantly over 24 hours, indicating dynamic behavior during the day.
+- Peaks are observed in the late evening and during working hours (morning to early evening).
+- There is a sharp drop in the metric during the night (early morning hours, between 2:00 AM to 6:00 AM).
+- There is a gradual rise post-6:00 AM, reaching a stable level during the daytime and declining again post-evening.
+
+![](output0.png) ![](output1.png)
 
 
-## Getting started
+## Visualising Yearly Trends in data
+![](output.png)
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Shortcomings
+#### The amount of time spent on performing Data Science on the data should have been much shorter and we should have had been focused more on training the ML model before doing some basic sanity checks on data and what's the best approach to handle it should be considering the time constraints it wasan't the best approach.
+#### We had major issues with setting up ROCOM on WSL and in hindsight we should have had just installed a GNU/Linux distro to train on instead of having so much trust on everything working as expected on windows. 
+#### We should have been more lax with dropping columns which had inconsistancies with the rest of the set for the data sourced from grid-india as it would have had negligible performance effect but would have reduced the training time a bit but would have saved us a ton of time during processing.
+#### Should have had trained multiple models simultaneously as one of our models failed after 6 hours and 5 minutes of training creating a panic
 
-## Add your files
+![](pain.png)
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+## Conclusion 
+#### overall we would like to thank the goverment of India for such a great learning opportunity.
+-----------
+## See You Next Year : )
 
-```
-cd existing_repo
-git remote add origin https://repo.mic.gov.in/sih2024/noida-institute-of-engineerign-and-technology-greater-noida/vidyutt-backend.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://repo.mic.gov.in/sih2024/noida-institute-of-engineerign-and-technology-greater-noida/vidyutt-backend/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+-----------
