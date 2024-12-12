@@ -34,8 +34,6 @@
 ![](output0.png) ![](output1.png)
 
 
-## Visualising Yearly Trends in data
-![](output.png)
 
 
 ## Shortcomings
