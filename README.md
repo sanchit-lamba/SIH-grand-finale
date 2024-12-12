@@ -5,6 +5,8 @@
 ### let me give you an overview of what is actually going on
 - data is sourced from [State load Dispatch Center](https://www.delhisldc.org/Redirect.aspx?Loc=0804) and [Grid India reports](https://report.grid-india.in/index.php?p=Daily+Report%2FPSP+Report) 
 - the grid report data was in the form of pdfs and was converted to xlsx and then those xlsx files were merged and turned into a consistant dataset.
+- data from the SLDC(with 5 minute time frequency) was retrieved using power query M language(scripting language for MS excel).
+- would like apologise to anyone who had to look through this absolute mess of a codebase.
 - as the data was complete and was definitely accurate so we shifted our focus on testing and trying diffrent models, cross refrencing and validating our results.
 - here are our findings:
     - the arima plus model provided by vertex ai for on demand custom training was the most inaccurate one and yielded around 89% accuracy
