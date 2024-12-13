@@ -31,7 +31,7 @@
 - There is a sharp drop in the metric during the night (early morning hours, between 2:00 AM to 6:00 AM).
 - There is a gradual rise post-6:00 AM, reaching a stable level during the daytime and declining again post-evening.
 
-![](output0.png) ![](output1.png)
+![](assets/output0.png) ![](assets/output1.png)
 
 
 
@@ -42,7 +42,7 @@
 #### We should have been more lax with dropping columns which had inconsistancies with the rest of the set for the data sourced from grid-india as it would have had negligible performance effect but would have reduced the training time a bit but would have saved us a ton of time during processing.
 #### Should have had trained multiple models simultaneously as one of our models failed after 6 hours and 5 minutes of training creating a panic
 
-![](pain.png)
+![](assets/pain.png)
 
 ## Conclusion 
 #### overall we would like to thank the goverment of India for such a great learning opportunity.
