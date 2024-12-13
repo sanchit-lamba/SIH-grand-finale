@@ -1,4 +1,4 @@
-# Vidyutt-backend
+# State electricity load prediction 
 
 ## hello this is the entirity of adhoc code used used to collect scrape and train models for my SIH project.
 
