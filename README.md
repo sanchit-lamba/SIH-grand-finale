@@ -22,7 +22,7 @@
 ## Visualising Yearly Trends
 - It is pretty apparent that the data is seasonal in nature as we encounter steep peaks in the months of May and they slowly taper off till December.
 - other than being seasonal it has nonsensical spikes and dips that need to be explained on a monthly, weekly and daily level for it to be coheasive in predicting the demand for a 5 minute interval on a specific day.  
-![](output.png)
+![](assets/output.png)
 
 ## Weekly and Daily Observations 
 - there are periodic peaks and downturns experienced probably influenced by weekends.
